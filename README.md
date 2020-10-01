@@ -2,10 +2,11 @@
 
 # spec
 
-This repository holds the sources for the WebAssembly draft specification
-(to seed a future
-[WebAssembly Working Group](https://lists.w3.org/Archives/Public/public-new-work/2017Jun/0005.html)),
-a reference implementation, and the official testsuite.
+This repository is a clone of github.com/WebAssembly/spec/. It is meant for discussion, prototype specification and implementation of a proposal to relax the current dead code validation behaviour.
+
+The [overview](proposals/relaxed-dead-code-validation/Overview.md) will soon be updated with a summary of the proposal.
+
+The tail of the original repository's readme follows...
 
 A formatted version of the spec is available here:
 [webassembly.github.io/spec](https://webassembly.github.io/spec/),
