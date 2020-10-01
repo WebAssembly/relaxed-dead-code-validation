@@ -1,6 +1,10 @@
 # Relaxed Dead Code Validation
 
-This proposal aims to make handling dead code simpler.
+This proposal aims to make handling syntactically dead code simpler by relaxing its validation requirements.
+
+Abstractly, dead code is no longer checked for violations of the [type system](https://webassembly.github.io/spec/core/valid/instructions.html#instructions).
+
+As of the current proposal, dead code will still obey syntactic restrictions laid out in the [binary format](https://webassembly.github.io/spec/core/binary/instructions.html), including restrictions on the maximum size of immediates..
 
 ## Barebones Spec Changes
 
