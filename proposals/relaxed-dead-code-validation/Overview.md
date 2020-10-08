@@ -2,7 +2,7 @@
 
 This proposal aims to make handling syntactically dead code simpler by relaxing its validation requirements.
 
-At a high level, in dead code, any [type system](https://webassembly.github.io/spec/core/valid/instructions.html#instructions) constraints which require a pop from the type stack to be checked is skipped (including the pop itself). For example, `ref.is_null` in dead code will not perform a check to see if a nullable reference is at the top of the type stack.
+At a high level, in dead code, any [type system](https://webassembly.github.io/spec/core/valid/instructions.html#instructions) constraint which depends on a pop from the type stack is skipped (including the pop itself). For example, `ref.is_null` in dead code will not perform a check to see if a nullable reference is at the top of the type stack.
 
 Dead code will still obey syntactic restrictions laid out in the [binary format](https://webassembly.github.io/spec/core/binary/instructions.html), including restrictions on the maximum size of immediates. In addition, type stack-independent checks (such as checking that the immediate of a `local.get i` is within the bounds of the declared local variables) will still be carried out.
 
