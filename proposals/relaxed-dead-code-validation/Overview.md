@@ -2,9 +2,9 @@
 
 This proposal aims to make handling syntactically dead code simpler by relaxing its validation requirements.
 
-Abstractly, dead code is no longer checked for violations of the [type system](https://webassembly.github.io/spec/core/valid/instructions.html#instructions).
+At a high level, in dead code, any [type system](https://webassembly.github.io/spec/core/valid/instructions.html#instructions) constraints which require a pop from the type stack to be checked is skipped (including the pop itself). For example, `ref.is_null` in dead code will not perform a check to see if a nullable reference is at the top of the type stack.
 
-As of the current proposal, dead code will still obey syntactic restrictions laid out in the [binary format](https://webassembly.github.io/spec/core/binary/instructions.html), including restrictions on the maximum size of immediates..
+Dead code will still obey syntactic restrictions laid out in the [binary format](https://webassembly.github.io/spec/core/binary/instructions.html), including restrictions on the maximum size of immediates. In addition, type stack-independent checks (such as checking that the immediate of a `local.get i` is within the bounds of the declared local variables) will still be carried out.
 
 ## Barebones Spec Changes
 
@@ -35,11 +35,15 @@ C ⊢ return : (t'*) t* -> ⊥
 
 Add the following typing rule:
 ```
-C ⊢ e* : ⊥ -> t*
+C ⊢ e* : t* -> t'*
+-------------------
+C ⊢ e* : ⊥ -> st
 ```
 
-If the reference types proposal has already landed (likely), the addition of a bottom value type can be reverted (at least for now).
+This final typing rule is somewhat fragile against hypothetical future instructions such as a first-class memory load `load.memref`. In the presence of such an instruction a more nuanced change to the typing rules may be appropriate.
 
 ## Implementation Consequences
 
 TODO
+
+At a high level, implementations no longer need to implement a polymorphic type stack. In dead code, pushes and pops are not carried out, and all dependent checks are elided. A one-off refactoring may be required of the current fused decode-validate logic.
