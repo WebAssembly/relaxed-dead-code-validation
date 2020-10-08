@@ -37,10 +37,10 @@ Add the following typing rule:
 ```
 C ⊢ e* : t* -> t'*
 -------------------
-C ⊢ e* : ⊥ -> st
+C ⊢ e* : ⊥ -> ot
 ```
 
-This final typing rule is somewhat fragile against hypothetical future instructions such as a first-class memory load `load.memref`. In the presence of such an instruction a more nuanced change to the typing rules may be appropriate.
+This final typing rule is somewhat fragile against hypothetical future instructions such as a first-class memory load `load.memref`. In the presence of (or anticipating) such an instruction, a more nuanced change to the typing rules may be appropriate.
 
 ## Implementation Consequences
 
