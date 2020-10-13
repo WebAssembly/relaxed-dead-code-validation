@@ -33,7 +33,7 @@ where `t_*` is non-deterministic (in practice, angelically picked/deferred via a
 
 ## Barebones Spec Changes
 
-Extend the typing rules to the following form:
+Extend the typing syntax to the following form:
 ```
 ot := t* | ⊥
 st := ot -> ot
