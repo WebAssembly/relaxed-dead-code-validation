@@ -6,6 +6,24 @@ At a high level, in dead code, any [type system](https://webassembly.github.io/s
 
 Dead code will still obey syntactic restrictions laid out in the [binary format](https://webassembly.github.io/spec/core/binary/instructions.html), including restrictions on the maximum size of immediates. In addition, type stack-independent checks (such as checking that the immediate of a `local.get i` is within the bounds of the declared local variables) will still be carried out.
 
+For reference, the current typing rules for instructions which result in subsequent "syntactically dead code" (`unreachable`, `br`, `br_table`, and `return`) are as follows:
+```
+C ⊢ unreachable : t* -> t_*
+
+C.labels[i] = t*
+------------------------
+C ⊢ br i : (t'*) t* -> t_*
+
+(C.labels[i] = t*)+
+-----------------------------------
+C ⊢ br_table i+ : (t'*) t* i32 -> t_*
+
+C.return = t*
+--------------------------
+C ⊢ return : (t'*) t* -> t_*
+```
+where `t_*` is non-deterministic (in practice, angelically picked/deferred via an `Unknown` type).
+
 ## Barebones Spec Changes
 
 Extend the typing rules to the following form:
