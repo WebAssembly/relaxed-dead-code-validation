@@ -64,6 +64,6 @@ This final typing rule is somewhat fragile with post-MVP instructions. It's just
 
 TODO
 
-At a high level, implementations no longer need to implement a polymorphic type stack. In dead code, some validation checks are skipped: pushes and pops are not carried out, and all dependent checks are elided. A one-off refactoring may be required of the current fused decode-validate logic.
+At a high level, implementations no longer need to implement a polymorphic type stack. In dead code, some validation checks are skipped: pushes and pops are not carried out, and all dependent checks are elided. A one-off refactoring may be required of the current fused decode-validate logic in order to switch to this modified algorithm (with reduced checks) when handling dead code.
 
 For a pseudocode example of a concrete validation case, see the `decode_and_validate_instruction` sketch in https://github.com/WebAssembly/relaxed-dead-code-validation/issues/1 
