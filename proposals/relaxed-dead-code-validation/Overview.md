@@ -8,6 +8,13 @@ Dead code will still obey syntactic restrictions laid out in the [binary format]
 
 For reference, the current typing rules for instructions which result in subsequent "syntactically dead code" (`unreachable`, `br`, `br_table`, and `return`) are as follows:
 ```
+syntax:
+ot := t*
+st := ot -> ot
+
+rules:
+C ⊢ e* : st
+
 C ⊢ unreachable : t* -> t_*
 
 C.labels[i] = t*
