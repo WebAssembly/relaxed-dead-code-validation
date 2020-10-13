@@ -12,9 +12,9 @@ syntax:
 ot := t*
 st := ot -> ot
 
-rules:
 C ⊢ e* : st
 
+rules:
 C ⊢ unreachable : t* -> t_*
 
 C.labels[i] = t*
