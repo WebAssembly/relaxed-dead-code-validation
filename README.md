@@ -4,7 +4,7 @@
 
 This repository is a clone of github.com/WebAssembly/spec/. It is meant for discussion, prototype specification and implementation of a proposal to relax the current dead code validation behaviour.
 
-The [overview](proposals/relaxed-dead-code-validation/Overview.md) will soon be updated with a summary of the proposal.
+The [overview](proposals/relaxed-dead-code-validation/Overview.md) contains a summary of the proposal.
 
 The tail of the original repository's readme follows...
 
