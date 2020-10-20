@@ -92,13 +92,13 @@ type ctrl_frame = {
 }
 ```
 
-### Global Variables
+#### Global Variables
 ```javascript
 var opds : opd_stack
 var ctrls : ctrl_stack
 ```
 
-### Auxilliary Functions
+#### Auxilliary Functions
 Note the lack of an `Unknown` type in `pop`.
 ```javascript
 function push_opd(type : val_type) =
@@ -139,7 +139,7 @@ function unreachable() =
   ctrls[0].unreachable := true
 ```
 
-### Validation of Opcode Sequences
+#### Validation of Opcode Sequences
 
 Note that no attempt is made to make this efficient or cleverly reduce line-count. "Reachability" could be a static parameter, or alternatively the reachability check could be pushed inside the pop/push functions in many cases.
 
