@@ -69,7 +69,10 @@ This final typing rule is somewhat fragile with post-MVP instructions. It's just
 
 ## Implementation Consequences
 
-At a high level, implementations no longer need to implement a polymorphic type stack. In dead code, some validation checks are skipped: pushes and pops are not carried out, and all dependent checks are elided. A one-off refactoring may be required of the current fused decode-validate logic in order to switch to this modified algorithm (with reduced checks) when handling dead code.
+At a high level, implementations no longer need to implement a polymorphic type stack.
+In dead code, some validation checks are skipped: pushes and pops are not carried out, and all dependent checks are elided.
+(Although another algorithmic approach that instead modifies the exisiting push-pop abstraction can be found [here](Push-Pop.md).)
+A one-off refactoring may be required of the current fused decode-validate logic in order to switch to this modified algorithm (with reduced checks) when handling dead code.
 
 ### Validation Algorithm
 
