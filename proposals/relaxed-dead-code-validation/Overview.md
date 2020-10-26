@@ -69,14 +69,13 @@ This final typing rule is somewhat fragile with post-MVP instructions. It's just
 
 ## Implementation Consequences
 
-At a high level, implementations no longer need to implement a polymorphic type stack.
-In dead code, some validation checks are skipped: pushes and pops are not carried out, and all dependent checks are elided.
-(Although another algorithmic approach that instead modifies the exisiting push-pop abstraction can be found [here](Push-Pop.md).)
-A one-off refactoring may be required of the current fused decode-validate logic in order to switch to this modified algorithm (with reduced checks) when handling dead code.
+At a high level, implementations no longer need to implement a polymorphic type stack. In dead code, some validation checks are skipped: pushes and pops are not carried out, and all dependent checks are elided. A one-off refactoring may be required of the current fused decode-validate logic in order to switch to this modified algorithm (with reduced checks) when handling dead code.
 
 ### Validation Algorithm
 
 What follows is a representation of the expected validation algorithm, in the style of https://webassembly.github.io/spec/core/appendix/algorithm.html. The original's caveats still apply: a real implementation will perform interleaved decode+validation.
+
+Note that no attempt is made to make this efficient or cleverly reduce line-count. "Reachability" could be a static parameter, or alternatively the reachability check could be pushed inside the pop/push functions in many cases. The latter approach is described [here](Push-Pop.md).
 
 #### Data Structures
 Note the lack of an `Unknown` type.
@@ -143,8 +142,6 @@ function unreachable() =
 ```
 
 #### Validation of Opcode Sequences
-
-Note that no attempt is made to make this efficient or cleverly reduce line-count. "Reachability" could be a static parameter, or alternatively the reachability check could be pushed inside the pop/push functions in many cases.
 
 ```javascript
 function validate(opcode) =
